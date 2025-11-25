@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Serasinghe Udaya Kumara | Portfolio</title>
+
+  <style>
+    /* ========== Dark Stylish Theme ========== */
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Noto+Sans+JP:wght@400;700&display=swap');
+
+    :root {
+      --primary: #00bfff;
+      --secondary: #0066ff;
+      --bg: #0a0f1a;
+      --card-bg: #101827;
+      --text: #e0e6ff;
+      --shadow: 0 0 25px rgba(0, 191, 255, 0.3);
+      --radius: 18px;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Poppins', 'Noto Sans JP', sans-serif;
+      background: radial-gradient(circle at top left, #0e1530, #000);
+      color: var(--text);
+      line-height: 1.8;
+      overflow-x: hidden;
+    }
+
+    header {
+      text-align: center;
+      padding: 80px 20px 60px;
+      background: linear-gradient(180deg, rgba(0,102,255,0.4), rgba(0,191,255,0.1));
+      box-shadow: var(--shadow);
+    }
+
+    header h1 {
+      font-size: 2.8rem;
+      color: var(--primary);
+      text-shadow: 0 0 15px var(--primary);
+      letter-spacing: 2px;
+      margin-bottom: 10px;
+    }
+
+    header p {
+      font-size: 1.1rem;
+      opacity: 0.85;
+    }
+
+    nav {
+      background: rgba(16, 24, 39, 0.9);
+      position: sticky;
+      top: 0;
+      padding: 15px;
+      text-align: center;
+      z-index: 100;
+      backdrop-filter: blur(6px);
+    }
+
+    nav a {
+      text-decoration: none;
+      color: var(--primary);
+      margin: 0 20px;
+      font-weight: 600;
+      transition: 0.3s;
+    }
+
+    nav a:hover {
+      color: white;
+      text-shadow: 0 0 10px var(--secondary);
+    }
+
+    section {
+      max-width: 1000px;
+      margin: 80px auto;
+      padding: 40px;
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      box-shadow: 0 0 20px rgba(0,191,255,0.1);
+      animation: fadeIn 0.8s ease forwards;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    section:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 0 30px rgba(0,191,255,0.3);
+    }
+
+    h2 {
+      color: var(--primary);
+      border-left: 5px solid var(--secondary);
+      padding-left: 15px;
+      margin-bottom: 25px;
+      font-size: 1.8rem;
+      text-shadow: 0 0 10px rgba(0,191,255,0.6);
+    }
+
+    .profile-content {
+      text-align: center;
+    }
+
+    .profile-content img {
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid var(--primary);
+      box-shadow: 0 0 25px rgba(0,191,255,0.4);
+      margin-bottom: 20px;
+      transition: 0.4s;
+    }
+
+    .profile-content img:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 35px rgba(0,191,255,0.6);
+    }
+
+    .download-btn {
+      display: inline-block;
+      margin-top: 15px;
+      padding: 12px 28px;
+      border-radius: 30px;
+      border: 1px solid var(--primary);
+      color: var(--primary);
+      font-weight: 600;
+      text-decoration: none;
+      transition: 0.4s;
+      box-shadow: 0 0 10px rgba(0,191,255,0.3);
+    }
+
+    .download-btn:hover {
+      background: var(--primary);
+      color: #fff;
+      box-shadow: 0 0 25px rgba(0,191,255,0.6);
+    }
+
+    .skills, .projects {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 25px;
+    }
+
+    .card {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(0,191,255,0.2);
+      padding: 25px;
+      border-radius: var(--radius);
+      box-shadow: 0 0 15px rgba(0,191,255,0.15);
+      transition: 0.4s;
+    }
+
+    .card:hover {
+      background: linear-gradient(135deg, rgba(0,191,255,0.15), rgba(0,102,255,0.3));
+      transform: translateY(-6px);
+      box-shadow: 0 0 30px rgba(0,191,255,0.4);
+    }
+
+    .card h3 {
+      color: var(--secondary);
+      margin-bottom: 10px;
+      font-size: 1.2rem;
+      text-shadow: 0 0 8px rgba(0,191,255,0.5);
+    }
+
+    footer {
+      text-align: center;
+      padding: 40px;
+      background: rgba(0,0,20,0.9);
+      color: white(--text);
+      font-size: 0.9rem;
+      border-top: 1px solid rgba(0,191,255,0.2);
+      box-shadow: 0 -5px 20px rgba(0,191,255,0.1);
+    }
+
+    footer p { margin: 5px 0; }
+
+    /* Glow animation */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Scrollbar */
+    ::-webkit-scrollbar { width: 10px; }
+    ::-webkit-scrollbar-thumb {
+      background: linear-gradient(var(--primary), var(--secondary));
+      border-radius: 10px;
+    }
+
+    @media (max-width: 600px) {
+      header h1 { font-size: 2rem; }
+      section { margin: 40px 20px; padding: 25px; }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1>Serasinghe Udaya Kumara</h1>
+    <p>上達することが高くてどんなことも早めに学ぶ力が高い</p>
+  </header>
+
+  <nav>
+    <a href="#profile">プロフィール</a>
+    <a href="#skills">スキル</a>
+    <a href="#projects">プロジェクト</a>
+    <a href="#contact">連絡先</a>
+  </nav>
+
+  <section id="profile">
+    <h2>プロフィール</h2>
+    <div class="profile-content">
+      <img src="images1/udaya.jpg" alt="プロフィール写真">
+      <p>日本で勉強している学生です。
+学ぶことと新しいものを作ることが大好きです。
+強みは、すぐに学べること、チームで協力できること、あきらめないことです。
+アイデアを美しくて使いやすいウェブサイトとして形にするのが好きです。</p>
+      <a href="CVNEW.xlsx" download class="download-btn">📄 履歴書をダウンロード</a>
+    </div>
+  </section>
+
+  <section id="skills">
+    <h2>スキル</h2>
+    <div class="skills">
+      <div class="card"><h3>HTML / CSS</h3><p>モダンでレスポンシブなデザインが可能です。</p></div>
+      <div class="card"><h3>JavaScript</h3><p>動的で魅力的なUIを構築できます。</p></div>
+      <div class="card"><h3>Excel</h3><p>効率的で再利用性の高いWebアプリ開発。</p></div>
+      <div class="card"><h3>Word / PowerPoint / Acess</h3><p>プロフェッショナルなデザイン作成が得意です。</p></div>
+    </div>
+  </section>
+
+  <section id="projects">
+    <h2>プロジェクト</h2>
+    <div class="projects">
+      
+      <div class="card">
+<h2><p>Fitness club<p></h2> 
+<a href="index.html">view project</a>
+</div>
+      <div class="card">
+<h2>Seat Shuffle App</h2>
+<a href="classroom_seating_fixed.html"> view project</a>
+
+    </div>
+  </section>
+
+  <section id="contact">
+    <h3>連絡先</h3>
+    <p>📧 Email: udayaserasinghe23@gmail.com</p>
+    <p>📞 Phone: 08094365694</p>
+    <p>📍 千葉モードビジネス専門学校</p>
+  </section>
+
+  <footer>
+    <p>© 2025 Serasinghe Udaya Kumara</p>
+    <p>All Rights Reserved.</p>
+  </footer>
+</body>
+</html>
