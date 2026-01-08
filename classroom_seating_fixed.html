@@ -3,105 +3,168 @@
 <head>
   <meta charset="UTF-8">
   <title>1-7 クラスの席テーブル</title>
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
   <style>
     body {
-      font-family: sans-serif;
-      text-align: center;
-    }
-    table {
-      border-collapse: collapse;
-      margin: 20px auto;
-    }
-    td {
-      border: 1px solid #333;
-      padding: 8px;
-      width: 110px;
-      height: 50px;
-      text-align: center;
-    }
-    td.blocked {
-      background-color: #444;
+      margin: 0;
+      font-family: "Poppins", sans-serif;
+      background: linear-gradient(135deg, #1e1e2f, #2b2b45);
       color: #fff;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
-    td.empty {
+
+    .container {
+      background: rgba(255,255,255,0.08);
+      padding: 30px;
+      border-radius: 20px;
+      max-width: 950px;
+      width: 95%;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+      text-align: center;
+    }
+
+    h1 {
+      margin-top: 0;
+    }
+
+    button {
+      background: linear-gradient(135deg, #ff9800, #ff5722);
       border: none;
-      background-color: transparent;
+      color: white;
+      padding: 10px 18px;
+      border-radius: 999px;
+      cursor: pointer;
+      font-weight: bold;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+      transition: transform 0.2s, box-shadow 0.2s;
     }
+
+    button:hover {
+      transform: scale(1.05);
+      box-shadow: 0 12px 24px rgba(0,0,0,0.4);
+    }
+
+    input {
+      padding: 10px 14px;
+      border-radius: 999px;
+      border: none;
+      outline: none;
+      margin-right: 6px;
+    }
+
+    table {
+      border-collapse: separate;
+      border-spacing: 10px;
+      margin: 25px auto;
+    }
+
+    td {
+      background: #ffffff;
+      color: #333;
+      border-radius: 14px;
+      width: 135px;
+      height: 65px;
+      font-size: 0.85em;
+      font-weight: 600;
+      transition: transform 0.3s, box-shadow 0.3s;
+      animation: pop 0.4s ease;
+    }
+
+    td:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.25);
+    }
+
+    td.blocked {
+      background: #ff4d4d;
+      color: white;
+    }
+
     td.blank {
-      background-color: #eee;
-      color: #999;
+      background: #ddd;
+      color: #888;
     }
-    input, button {
-      padding: 6px 10px;
-      margin: 5px;
-      font-size: 1em;
+
+    td.empty {
+      background: transparent;
+      box-shadow: none;
+    }
+
+    /* Highlight found seat */
+    td.highlight {
+      background: linear-gradient(135deg, #00e5ff, #00b0ff);
+      color: #000;
+      box-shadow: 0 0 25px rgba(0,229,255,0.9);
+      transform: scale(1.08);
+    }
+
+    #result {
+      font-size: 1.1em;
+      font-weight: bold;
+      margin-top: 10px;
+    }
+
+    /* Shuffle animation */
+    @keyframes pop {
+      0% { transform: scale(0.5); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
     }
   </style>
 </head>
+
 <body>
+  <div class="container">
+    <h1>🎲 1-7 クラスの席テーブル</h1>
 
-<h1>🎲 1-7 クラスの席テーブル</h1>
-<button onclick="shuffleSeats()">席を決定！</button>
+    <button onclick="shuffleSeats()">席を決定！</button>
 
-<h3>🔍 自分の席を探す</h3>
-<input type="text" id="searchName" placeholder="出席番号または名前">
-<button onclick="searchSeat()">検索</button>
+    <h3>🔍 自分の席を探す</h3>
+    <input type="text" id="searchName" placeholder="出席番号または名前">
+    <button onclick="searchSeat()">検索</button>
 
-<table id="seatTable"></table>
+    <table id="seatTable"></table>
 
-<p id="result"></p>
+    <p id="result"></p>
+  </div>
 
 <script>
   const students = [
-    { id: "01", name: "RASHMI" },
-    { id: "02", name: "RANDIL" },
-    { id: "03", name: "DAHAL RAJ" },
-    { id: "04", name: "PHAM THI THU HUONG" },
-    { id: "05", name: "SHEHAN" },
-    { id: "06", name: "NGUYEN THE LINH" },
-    { id: "07", name: "BAWANTHA" },
-    { id: "08", name: "SURAJ" },
-    { id: "09", name: "KUSHAL" },
-    { id: "10", name: "VISHMI %" },
-    { id: "11", name: "JUNAID" },
-    { id: "12", name: "DAHAL SANTOSH" },
-    { id: "13", name: "THARINDU" },
-    { id: "14", name: "DINESH" },
-    { id: "15", name: "ALI USMAN" },
-    { id: "16", name: "SAUD MANOJ" },
-    { id: "17", name: "SAMITH" },
-    { id: "18", name: "GOPALI DIKSHYA" },
-    { id: "19", name: "ALAMIN" },
-    { id: "20", name: "SHRISHA" },
-    { id: "21", name: "DAS BIKASH KUMAR" },
-    { id: "22", name: "NISHADHI" },
-    { id: "23", name: "ANJALEE" },
-    { id: "24", name: "NIKEE" },
-    { id: "25", name: "NGUYEN THANH TAM" },
-    { id: "26", name: "UDAYA" },
-    { id: "27", name: "OCHIR" },
-    { id: "28", name: "ZAFRI HASAN" },
-    { id: "29", name: "SABIN" },
-    { id: "30", name: "I PEREZ JASOND" },
-    { id: "31", name: "BYAMBAJARGAL" },
-    { id: "32", name: "ZHOU QINYU" }
+    { id: "01", name: "RASHMI" }, { id: "02", name: "RANDIL" },
+    { id: "03", name: "DAHAL RAJ" }, { id: "04", name: "PHAM THI THU HUONG" },
+    { id: "05", name: "SHEHAN" }, { id: "06", name: "NGUYEN THE LINH" },
+    { id: "07", name: "BAWANTHA" }, { id: "08", name: "SURAJ" },
+    { id: "09", name: "KUSHAL" }, { id: "10", name: "VISHMI " },
+    { id: "11", name: "JUNAID" }, { id: "12", name: "DAHAL SANTOSH" },
+    { id: "13", name: "THARINDU" }, { id: "14", name: "DINESH" },
+    { id: "15", name: "ALI USMAN" }, { id: "16", name: "SAUD MANOJ" },
+    { id: "17", name: "SAMITH" }, { id: "18", name: "GOPALI DIKSHYA" },
+    { id: "19", name: "ALAMIN" }, { id: "20", name: "SHRISHA" },
+    { id: "21", name: "DAS BIKASH KUMAR" }, { id: "22", name: "NISHADHI" },
+    { id: "23", name: "ANJALEE" }, { id: "24", name: "NIKEE" },
+    { id: "25", name: "NGUYEN THANH TAM" }, { id: "26", name: "UDAYA" },
+    { id: "27", name: "OCHIR" }, { id: "28", name: "ZAFRI HASAN" },
+    { id: "29", name: "SABIN" }, { id: "30", name: "I PEREZ JASOND" },
+    { id: "31", name: "BYAMBAJARGAL" }, { id: "32", name: "ZHOU QINYU" }
   ];
 
-  const layout = [4, 4, 5, 5, 5, 5, 4]; // 列ごとの席数
-  const blockedSeat = { col: 7, row: 0 };
+  const layout = [4,4,5,5,5,5,4];
+  const blockedSeat = { col: 6, row: 0 };
   let currentSeats = [];
 
   function shuffleSeats() {
-    const shuffled = [...students];
-    for (let i = shuffled.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
-    }
-
+    const shuffled = [...students].sort(() => Math.random() - 0.5);
     currentSeats = [];
-    const maxRows = Math.max(...layout);
+
     const table = document.getElementById("seatTable");
     table.innerHTML = "";
+
+    const maxRows = Math.max(...layout);
 
     for (let row = 0; row < maxRows; row++) {
       const tr = document.createElement("tr");
@@ -115,18 +178,17 @@
             td.className = "blocked";
             currentSeats.push(null);
           } else {
-            const student = shuffled.shift() || null;
+            const student = shuffled.shift();
             if (student) {
               td.textContent = `${student.id} ${student.name}`;
+              currentSeats.push(student);
             } else {
-              td.textContent = "";
+              td.className = "blank";
+              currentSeats.push(null);
             }
-            td.className = student ? "" : "blank";
-            currentSeats.push(student);
           }
         } else {
           td.className = "empty";
-          td.textContent = "";
           currentSeats.push(null);
         }
 
@@ -140,28 +202,28 @@
 
   function searchSeat() {
     const input = document.getElementById("searchName").value.trim().toLowerCase();
-    let found = false;
-    let seatNumber = 0;
+    const cells = document.querySelectorAll("td");
 
+    cells.forEach(td => td.classList.remove("highlight"));
+
+    let seatCount = 0;
     for (let i = 0; i < currentSeats.length; i++) {
       const student = currentSeats[i];
       if (student) {
-        seatNumber++;
+        seatCount++;
         if (
           student.name.toLowerCase().includes(input) ||
-          student.id === input
+          student.id === input.padStart(2, "0")
         ) {
+          cells[i].classList.add("highlight");
           document.getElementById("result").textContent =
-            `✅ 出席番号 ${student.id} の ${student.name} さんの席は ${seatNumber} 番の位置です。`;
-          found = true;
-          break;
+            `✅ ${student.id} ${student.name} さんの席です！`;
+          return;
         }
       }
     }
 
-    if (!found) {
-      document.getElementById("result").textContent = "❌ 見つかりませんでした。";
-    }
+    document.getElementById("result").textContent = "❌ 見つかりませんでした。";
   }
 
   window.onload = shuffleSeats;
