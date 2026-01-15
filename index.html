@@ -169,6 +169,33 @@
       text-shadow: 0 0 8px rgba(0,191,255,0.5);
     }
 
+    /* ===== Contact Upgrade ===== */
+.contact-card {
+  text-align:center;
+}
+
+.contact-card .icon {
+  font-size:2.5rem;
+  margin-bottom:15px;
+}
+
+.contact-card h3 {
+  color:var(--secondary);
+  margin-bottom:10px;
+}
+
+.contact-card a {
+  color:var(--text);
+  text-decoration:none;
+}
+
+.contact-card a:hover {
+  color:var(--primary);
+  text-shadow:0 0 10px var(--primary);
+}
+
+
+    
     footer {
       text-align: center;
       padding: 40px;
@@ -251,12 +278,36 @@
     </div>
   </section>
 
-  <section id="contact">
-    <h3>連絡先</h3>
-    <p>📧 Email: udayaserasinghe23@gmail.com</p>
-    <p>📞 Phone: 08094365694</p>
-    <p>📍 千葉モードビジネス専門学校</p>
-  </section>
+ <section id="contact">
+  <h2>連絡先</h2>
+  <p style="text-align:center;opacity:.8;margin-bottom:30px;">
+    お仕事・ご相談などお気軽にご連絡ください
+  </p>
+
+  <div class="contact-grid">
+    <div class="card contact-card">
+      <div class="icon">📧</div>
+      <h3>Email</h3>
+      <a href="mailto:udayaserasinghe23@gmail.com">
+        udayaserasinghe23@gmail.com
+      </a>
+    </div>
+
+    <div class="card contact-card">
+      <div class="icon">📞</div>
+      <h3>Phone</h3>
+      <a href="tel:+818094365694">
+        080-9436-5694
+      </a>
+    </div>
+
+    <div class="card contact-card">
+      <div class="icon">📍</div>
+      <h3>Location</h3>
+      <p>千葉モードビジネス専門学校<br>Japan</p>
+    </div>
+  </div>
+</section>
 
   <footer>
     <p>© 2025 Serasinghe Udaya Kumara</p>
@@ -264,6 +315,7 @@
   </footer>
 </body>
 </html>
+
 
 
 
